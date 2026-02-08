@@ -1,0 +1,10 @@
+[project]
+name = "litellm-web-chat"
+version = "0.1.0"
+description = "Web chat interface using LiteLLM with Vertex AI"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn>=0.27.0",
+    "litellm[google]>=1.30.0",
+]
