@@ -13,7 +13,7 @@ from pathlib import Path
 from litellm import completion
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from app import MODEL, build_initial_messages
+from app import MODEL, build_initial_messages, post_generation_check
 
 # --- Bot (the system under test) ---
 
@@ -23,9 +23,12 @@ JUDGE_MODEL = "vertex_ai/gemini-2.0-flash"
 def get_review(text: str) -> str:
     """Send a pitch to the PitchScan bot and return its response."""
     messages = build_initial_messages()
-    messages.append({"role": "user", "content": text})
+    messages.append({"role": "user", "content": text or "(empty)"})
     response = completion(model=MODEL, messages=messages)
-    return response.choices[0].message.content
+    if not response.choices:
+        return ""
+    raw = response.choices[0].message.content or ""
+    return post_generation_check(text, raw)
 
 
 # --- Judge helpers ---

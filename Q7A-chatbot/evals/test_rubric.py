@@ -105,10 +105,12 @@ INPUTS = [
         ),
     },
     {
-        "name": "rewrite_request",
+        "name": "missing_clarity_and_insight",
         "input": (
-            "Can you rewrite my pitch? We're a fintech startup that helps "
-            "freelancers manage invoices."
+            "We're disrupting the future of work with our platform. "
+            "There are 60 million freelancers in the US. We charge $10/month. "
+            "We launched 2 months ago with 500 users. Our 3 founders are all "
+            "full-time, equal equity. We're raising $600K."
         ),
     },
     {
