@@ -89,6 +89,22 @@
                 gap: 1.25rem;
                 min-height: 400px;
                 max-height: 65vh;
+                scrollbar-color: #3f3f46 #18181b;
+                scrollbar-width: thin;
+            }
+            #messages::-webkit-scrollbar {
+                width: 8px;
+            }
+            #messages::-webkit-scrollbar-track {
+                background: #18181b;
+                border-radius: 4px;
+            }
+            #messages::-webkit-scrollbar-thumb {
+                background: #3f3f46;
+                border-radius: 4px;
+            }
+            #messages::-webkit-scrollbar-thumb:hover {
+                background: #52525b;
             }
             .msg {
                 line-height: 1.65;
@@ -137,21 +153,42 @@
             }
             #user-input {
                 flex: 1;
+                min-height: 80px;
+                max-height: 200px;
                 padding: 0.75rem 1rem;
                 border: 1px solid #27272a;
                 border-radius: 8px;
                 font-family: "Inter", system-ui, sans-serif;
                 font-size: 0.88rem;
+                line-height: 1.5;
                 outline: none;
                 background: #0f0f13;
                 color: #e4e4e7;
+                caret-color: #f97316;
+                resize: vertical;
                 transition: border-color 0.15s;
+                scrollbar-color: #3f3f46 #18181b;
+                scrollbar-width: thin;
             }
             #user-input::placeholder {
                 color: #52525b;
             }
             #user-input:focus {
                 border-color: #f97316;
+            }
+            #user-input::-webkit-scrollbar {
+                width: 8px;
+            }
+            #user-input::-webkit-scrollbar-track {
+                background: #18181b;
+                border-radius: 4px;
+            }
+            #user-input::-webkit-scrollbar-thumb {
+                background: #3f3f46;
+                border-radius: 4px;
+            }
+            #user-input::-webkit-scrollbar-thumb:hover {
+                background: #52525b;
             }
             button {
                 padding: 0.75rem 1.4rem;
@@ -196,12 +233,12 @@
             </div>
             <div id="messages"></div>
             <div id="input-area">
-                <input
-                    type="text"
+                <textarea
                     id="user-input"
                     placeholder="Paste your startup pitch here..."
                     autocomplete="off"
-                />
+                    rows="3"
+                ></textarea>
                 <button id="send-btn">Scan</button>
             </div>
         </div>
@@ -266,7 +303,10 @@
 
             sendBtn.addEventListener("click", send);
             userInput.addEventListener("keydown", function (e) {
-                if (e.key === "Enter") send();
+                if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    send();
+                }
             });
             userInput.focus();
         </script>
