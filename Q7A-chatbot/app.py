@@ -260,6 +260,21 @@ def post_generation_check(user_msg: str, bot_response: str) -> str:
     return bot_response
 
 
+def looks_like_pitch(text: str) -> bool:
+    """Quick heuristic: does this look like a startup pitch or pitch-related question?"""
+    text = text.strip()
+    if len(text) < 15:
+        return False
+    text_lower = text.lower()
+    pitch_signals = [
+        "pitch", "startup", "company", "we're", "we are", "our ", "founder",
+        "co-founder", "product", "platform", "market", "revenue", "users",
+        "customers", "raising", "funding", "seed", "series", "investor",
+        "business model", "traction", "team", "ask", "dimension",
+    ]
+    return any(sig in text_lower for sig in pitch_signals)
+
+
 # --- Session Management ---
 
 sessions: dict[str, list[dict]] = {}
@@ -292,6 +307,10 @@ def chat(request: ChatRequest):
     safety_response = safety_check(request.message)
     if safety_response:
         return ChatResponse(response=safety_response, session_id=session_id)
+
+    # Pre-generation heuristic: redirect generic/non-pitch messages
+    if not looks_like_pitch(request.message):
+        return ChatResponse(response=REDIRECT_MSG, session_id=session_id)
 
     if session_id not in sessions:
         sessions[session_id] = build_initial_messages()
