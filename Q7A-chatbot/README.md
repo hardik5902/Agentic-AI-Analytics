@@ -1,8 +1,8 @@
 # PitchScan — Startup Pitch Risk Scanner
 
-A domain Q&A chatbot that scans startup pitches for risks and gaps against Y Combinator's seven-dimension pitch framework. Paste your pitch and the bot identifies missing elements, weak claims, and red flags — without rewriting your pitch for you.
+A domain Q&A chatbot that scans startup pitches for risks and gaps against Y Combinator's seven-dimensional pitch framework. Paste your pitch and the bot identifies missing elements, weak claims, and red flags — without rewriting your pitch for you.
 
-**Live URL**: *https://q7a-chatbot-1008110254578.us-central1.run.app/*
+**Live URL**: *https://q7a-chatbot-1008110254578.us-central1.run.app/* This link is publically accessible.
 
 ## Topic
 
